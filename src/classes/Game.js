@@ -36,7 +36,7 @@ class Game {
             modifier:10
         }
     }
-    tiles = 0;
+    tiles = 40;
     difficultySettings = {
         speed:50,
         modifier:10
@@ -54,7 +54,7 @@ class Game {
         this.timeManager = new TimeManager();
         this.menuManager = new MenuManager();
     }
-    initialize = function(tiles){
+    initialize = function(tiles=40){
         this.initialized = true;
         this.initializeValues();
         this.tiles = tiles;
@@ -124,7 +124,7 @@ class Game {
     }
     start = function(players = 1){
         if(!this.initialized){
-            this.initialize();
+            this.initialize(this.tiles);
         }else{
             this.initializeValues();
         }       
