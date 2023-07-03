@@ -98,7 +98,7 @@ class Game {
             field.append(element);
         }      
     }
-    initializeField(tiles){
+    initializeField(tiles=40){
         var index = 0;
         for(var i = 0; i<tiles; i++){
             var cols = [];
