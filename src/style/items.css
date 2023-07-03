@@ -1,0 +1,30 @@
+
+.item.normal {
+    background-color: purple;        
+    /*background-image: url('../res/items/apple.png');*/
+    background-size: contain;
+}
+.item.rare {
+    background-color: silver;    
+    /*background-image: url('../res/items/bananas.png');*/
+    background-size: contain;
+}
+.item.ultra {
+    background-color: gold;    
+    /*background-image: url('../res/items/star.png');*/
+    background-size: contain;
+}
+
+.item.almosteGone{
+    animation: blinking 0.8s infinite;
+}
+.item.evenCloser{
+    animation: blinking 0.5s infinite;
+}
+@keyframes blinking {
+    0%, 98% {            
+    }
+    99%, 100% {
+      background-color: rgba(0,0,0,0);      
+    }
+}

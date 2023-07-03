@@ -1,0 +1,35 @@
+.container {
+    height: 98vh;
+    width: 98vw;
+    text-align: center;
+    z-index: 1;
+    background-color: white;
+}
+.field {
+    margin:auto;
+    background-image: url('../res/nahtloses-gruenes-grasmuster_1284-52275.avif');    
+    /*background-image: url('../res/turf-surface-texture.jpg');        */
+    background-size: contain;
+
+    height: 90vh;
+    width: 90vh;
+    display: grid;
+}
+.snake1{
+    border: solid black;
+}
+.snake2{
+    border: none;
+}
+
+.player0 {
+    background-color: blue;
+}
+
+.player1 {
+    background-color: red;
+}
+
+
+
+

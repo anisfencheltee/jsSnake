@@ -1,0 +1,56 @@
+a:link {
+    color: white;
+}
+  
+a:visited {
+    color: lightgrey;
+}
+
+
+#scoreboard{
+    width:90vh;
+    display:flex;
+    justify-content: center;
+    margin:auto;
+}
+
+.overlay{
+    position: absolute;    
+    background-color: rgba(0, 0, 0, 0.8);
+    top:0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    color: white;    
+}
+.menu, .gameOver, .about, .highscores {
+    margin-top: 20vh;    
+}
+.button{
+    width:10vw;
+    background-color: green;    
+    padding: 25px 50px 25px 50px;
+    margin: 10px auto 10px auto;
+}
+.button:hover{    
+    cursor: pointer;
+    background-color: lightgreen;    
+}
+.countDown{    
+    margin-top: 20vh;      
+    font-size:50px;              
+}
+
+.countDown.animate{
+    font-size: 500px;    
+    transition: all 1s;
+}
+
+.visible{
+    display:block;
+}
+
+.hidden{
+    display: none;
+}
