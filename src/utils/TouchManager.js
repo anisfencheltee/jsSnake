@@ -44,9 +44,9 @@ class TouchManager{
         this.yDown = null;                                             
     };
     handleMovement(direction){
-        if(this.game.allowMovement(0)) {
-            game.restrictMovement(0);
-            game.setDirection(0,direction);
+        if(this.game.allowMovement(1)) {
+            game.restrictMovement(1);
+            game.setDirection(1,direction);
         }
     }
 }
