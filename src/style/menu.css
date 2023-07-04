@@ -8,6 +8,10 @@ a:visited {
     color: lightgrey;
 }
 
+.options{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
 
 #scoreboard{
     width:90vh;
