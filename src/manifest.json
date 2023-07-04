@@ -1,0 +1,22 @@
+{
+    "name": "JSSnake",
+    "short_name": "Snake",
+    "description": "Classic Mobile Game",
+    "categories": [
+    "Gaming",
+    "Snake"
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "orientation": "any",            
+    "gcm_sender_id": "482941778795",
+    "DO_NOT_CHANGE_GCM_SENDER_ID": "Do not change the GCM Sender ID",
+    "icons": [
+    {
+    "src": "res/favicons/snake.png",
+    "sizes": "64x64",
+    "type": "image/png"
+    }
+    ]
+    }
