@@ -12,7 +12,7 @@ class TouchManager{
     }                                                     
                                                                          
     handleTouchStart(evt) {
-        const firstTouch = getTouches(evt)[0];                                      
+        const firstTouch = this.getTouches(evt)[0];                                      
         xDown = firstTouch.clientX;                                      
         yDown = firstTouch.clientY;                                      
     };                                                
