@@ -1,5 +1,6 @@
 var game = new Game();
 var cookieManager = new CookieManager();
+var TouchManager = new TouchManager(game);
 var players = 1;
 let gameMode = 'classic';
 var controls = {
