@@ -28,15 +28,15 @@ class TouchManager{
         var yDiff = this.yDown - yUp;                                                                                    
         if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
             if ( xDiff > 0 ) {
-                this.handleMovement('right')
-            } else {
                 this.handleMovement('left')
+            } else {
+                this.handleMovement('right')
             }                       
         } else {
             if ( yDiff > 0 ) {
-                this.handleMovement('down')
-            } else { 
                 this.handleMovement('up')
+            } else { 
+                this.handleMovement('down')
             }                                                                 
         }        
         /* reset values */
