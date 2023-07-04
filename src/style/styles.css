@@ -1,3 +1,6 @@
+body {
+    overscroll-behavior: contain;
+  }
 .container {
     height: 98vh;
     width: 98vw;
