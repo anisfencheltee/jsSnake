@@ -2,8 +2,8 @@ class TouchManager{
     xDown = null;                                                        
     yDown = null;
     constructor(game){
-        document.addEventListener('touchstart', handleTouchStart, false);        
-        document.addEventListener('touchmove', handleTouchMove, false);
+        document.addEventListener('touchstart', this.handleTouchStart.bind(this), false);        
+        document.addEventListener('touchmove', this.handleTouchMove.bind(this), false);
         this.game = game;
     }
     getTouches(evt) {
