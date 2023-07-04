@@ -1,3 +1,14 @@
+@media (orientation: portrait) {
+    .overlay{
+        position: absolute;    
+        background-color: rgba(0, 0, 0, 0.8);
+        top:0;
+        left:0;
+        width: 98vw;
+        height: 98vh;        
+    }
+}
+
 a:link {
     color: white;
 }
