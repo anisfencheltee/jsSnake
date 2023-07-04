@@ -29,7 +29,17 @@
 .player1 {
     background-color: red;
 }
-
+  
+@media (orientation: portrait) {
+    .field {
+        height: 90vw;
+        width: 90vw;
+    }
+    .container {
+        height: 98vh;
+        width: 98vw;
+    }
+}
 
 
 
