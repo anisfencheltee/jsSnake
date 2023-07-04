@@ -1,3 +1,5 @@
+
+
 a:link {
     color: white;
 }
@@ -5,7 +7,6 @@ a:link {
 a:visited {
     color: lightgrey;
 }
-
 
 #scoreboard{
     width:90vh;
@@ -53,4 +54,27 @@ a:visited {
 
 .hidden{
     display: none;
+}
+@media (orientation: portrait) {
+    .overlay{
+        position: absolute;    
+        background-color: rgba(0, 0, 0, 0.8);
+        top:0;
+        left:0;
+        width: 98vw;
+        height: 98vh;        
+    }
+    #scoreboard{
+        width:90vw;        
+    }
+}
+@media screen and (min-width:768px) and (max-width:1024px) and (orientation:landscape){
+    .button{
+        padding: 10px 20px 10px 20px;
+    }
+}
+@media screen and (min-width:320px) and (max-width:767px) and (orientation:landscape) {
+    .button{
+        padding: 10px 20px 10px 20px;
+    }   
 }
