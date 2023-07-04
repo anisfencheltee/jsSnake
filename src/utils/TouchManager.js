@@ -13,19 +13,19 @@ class TouchManager{
                                                                          
     handleTouchStart(evt) {
         const firstTouch = this.getTouches(evt)[0];                                      
-        xDown = firstTouch.clientX;                                      
-        yDown = firstTouch.clientY;                                      
+        this.xDown = firstTouch.clientX;                                      
+        this.yDown = firstTouch.clientY;                                      
     };                                                
                                                                          
     handleTouchMove(evt) {
-        if ( ! xDown || ! yDown ) {
+        if ( ! this.xDown || ! this.yDown ) {
             return;
         }
         var xUp = evt.touches[0].clientX;                                    
         var yUp = evt.touches[0].clientY;
 
-        var xDiff = xDown - xUp;
-        var yDiff = yDown - yUp;                                                                                    
+        var xDiff = this.xDown - xUp;
+        var yDiff = this.yDown - yUp;                                                                                    
         if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
             if ( xDiff > 0 ) {
                 this.handleMovement('right')
@@ -40,8 +40,8 @@ class TouchManager{
             }                                                                 
         }        
         /* reset values */
-        xDown = null;
-        yDown = null;                                             
+        this.xDown = null;
+        this.yDown = null;                                             
     };
     handleMovement(direction){
         if(this.game.allowMovement(0)) {
