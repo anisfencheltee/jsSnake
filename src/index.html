@@ -1,5 +1,6 @@
 <head>    
     <title>JSSnake</title>
+    <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/x-icon" href="./res/favicons/snake.png">
     <link rel="stylesheet" href="./style/styles.css">
     <link rel="stylesheet" href="./style/items.css">
@@ -7,6 +8,7 @@
     <script type='text/javascript' src='./utils/CookieManager.js' ></script>
     <script type='text/javascript' src='./utils/TimeManager.js' ></script>
     <script type='text/javascript' src='./utils/MenuManager.js' ></script>
+    <script type='text/javascript' src='./utils/TouchManager.js' ></script>
     <script type='text/javascript' src='./classes/Tile.js' ></script>
     <script type='text/javascript' src='./classes/Snake.js' ></script>
     <script type='text/javascript' src='./classes/Item.js' ></script>
@@ -26,10 +28,12 @@
 <div id="overlay" class="visible overlay">
     <div id= "menu" class="menu visible">
         <h1>JS Snake</h1>
-        <div data-target='mode' id = "single" class = "button" onclick="showMenu(this)">Play</div>        
-        <div data-target='mode' id = "multi" class = "button" onclick="showMenu(this)">Multiplayer</div>        
-        <div data-target='options' class = "button" onclick="showMenu(this)">Options</div>        
-        <div data-target='highscores' class = "button" onclick="showMenu(this)">Highscores</div>                
+        <div class="options">
+            <div data-target='mode' id = "single" class = "button" onclick="showMenu(this)">Play</div>        
+            <div data-target='mode' id = "multi" class = "button" onclick="showMenu(this)">Multiplayer</div>        
+            <div data-target='options' class = "button" onclick="showMenu(this)">Options</div>        
+            <div data-target='highscores' class = "button" onclick="showMenu(this)">Highscores</div>                
+        </div>
     </div>
     <div id="mode" class="menu hidden">
         <h1>Gamemode</h1>
