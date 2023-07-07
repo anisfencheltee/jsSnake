@@ -338,8 +338,10 @@ class Game {
             var spawnCol = Math.floor(Math.random() * this.tiles);
         }         
         this.field[spawnRow][spawnCol].addItem(spawnRow,spawnCol);           
+        this.field[spawnRow+1][spawnCol+1].addMPItem(spawnRow+1,spawnCol+1);  
         let item = this.field[spawnRow][spawnCol].getItem()        
         this.items[spawnRow+','+spawnCol] = item;
+
         if(item.getType()!=='normal' &&this.items.length<10){
             this.spawnItem();
         }
