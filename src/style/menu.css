@@ -33,10 +33,11 @@ a:visited {
     background-color: green;    
     padding: 25px 50px 25px 50px;
     margin: 10px auto 10px auto;
+    border-radius: 15px;
 }
 .button:hover{    
     cursor: pointer;
-    background-color: lightgreen;    
+    background-color: olivedrab;    
 }
 .countDown{    
     margin-top: 20vh;      
