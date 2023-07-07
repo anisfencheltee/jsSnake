@@ -158,7 +158,7 @@ class Game {
         if(this.countdown===0){
             countDown.classList.remove('animate')
             this.menuManager.hideOverlay();            
-            this.gameOver = false;                        
+            this.gameOver = false;              
             this.tick();            
             var gameLoop = setTimeout(this.loop.bind(this),this.currentInterval);   
         }else if(this.counting){              
@@ -228,7 +228,8 @@ class Game {
                 break;
             case 'blocked':
             case 'snake':
-            case 'outOfBounds':                       
+            case 'outOfBounds':
+                this.playDamageAnimation();                       
                 if(this.gameMode === 'classic'){
                     this.gameOver = true;
                     this.gameIsOverNow(player);                
@@ -288,6 +289,17 @@ class Game {
             field.removeItem()            
             delete this.items[removeItems[index]];
         }
+    }
+
+    playDamageAnimation(){
+        let circle = document.getElementById('damage');  
+        circle.classList.add('animate')  
+        circle.innerHTML = "-10"
+        setTimeout(function(){            
+            let circle = document.getElementById('damage');  
+            circle.innerHTML = ""
+            circle.classList.remove('animate')
+        },450)  
     }
     updateTimer(){
         this.timer = this.timer - this.currentInterval;
