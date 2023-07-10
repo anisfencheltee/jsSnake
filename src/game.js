@@ -3,6 +3,40 @@ var cookieManager = new CookieManager();
 var touchManager = new TouchManager(game);
 var players = 1;
 let gameMode = 'classic';
+let options = {
+    difficulty:{
+        elementId:'difficultySelect',
+        elementType:'select',
+        gameFunction:game.setDifficulty.bind(game)
+    },
+    mode:{
+        elementId:'gamemodeSelect',
+        elementType:'select',
+        gameFunction:game.setMode.bind(game)
+    },
+    size:{
+        elementId:'sizeSelect',
+        elementType:'select',
+        gameFunction:game.setTiles.bind(game)
+    },
+    mpItems:{
+        elementId:'mpItems',
+        elementType:'checkbox',
+        gameFunction:game.setMpItems.bind(game)
+    },
+    mpSpawnRate:{
+        elementId:'mpSpawnRate',
+        elementType:'select',
+        gameFunction:game.setMpSpawnrate.bind(game)
+    },
+    mpHyper:{
+        elementId:'mpHyper',
+        elementType:'checkbox',
+        gameFunction:game.setHyperMode.bind(game)
+
+    }
+
+}
 var controls = {
     ArrowUp:{
         player:1,
@@ -39,30 +73,18 @@ var controls = {
 }
 play = function(e){    
     console.log(e.id)
-    let difficulty = cookieManager.getCookie('difficulty')
-    let mode = cookieManager.getCookie('mode')
-    let size = cookieManager.getCookie('size')        
-    let mpItems = cookieManager.getCookie('mpItems')     
-    let mpSpawnRate = cookieManager.getCookie('mpSpawnRate');
-    let mpHyper = cookieManager.getCookie('mpHyper');
-    if(difficulty!==''){
-        game.setDifficulty(difficulty);
+    for(let option in options){
+        let optionDetails = options[option]
+        let cookieValue = cookieManager.getCookie(option);
+        if(cookieValue!==''){
+            if(optionDetails.elementType !== 'checkbox'){
+                optionDetails.gameFunction(cookieValue);
+            }else{
+                optionDetails.gameFunction(cookieValue==='true');
+            }
+        }        
     }
-    if(mode!==''){
-        game.setMode(mode);
-    }
-    if(size!==''){
-        game.setTiles(size);
-    }    
-    if(mpItems!==''){
-        game.setMpItems(mpItems==='true');
-    }
-    if(mpSpawnRate !== ''){
-        game.setMpSpawnrate(mpSpawnRate);
-    }
-    if(mpHyper !== ''){
-        game.setHyperMode(mpHyper==='true');
-    }
+    
     if(e.id==='classic'){
         gameMode = e.id;
     }else if(e.id === 'timeAttack'){
@@ -83,29 +105,16 @@ setSelect=function(id,value){
     }
 }
 setOptions = function(){
-    let difficulty = cookieManager.getCookie('difficulty');
-    let mode = cookieManager.getCookie('mode');
-    let size = cookieManager.getCookie('size');
-    let mpItems = cookieManager.getCookie('mpItems');
-    let mpSpawnRate = cookieManager.getCookie('mpSpawnRate')
-    let mpHyper = cookieManager.getCookie('mpHyper')
-    if(difficulty!==''){
-        setSelect('difficultySelect',difficulty);
-    }
-    if(mode!==''){
-        setSelect('gamemodeSelect',mode);
-    }
-    if(size!==''){
-        setSelect('sizeSelect',size);
-    }
-    if(mpItems !==''){
-        document.getElementById('mpItems').checked = mpItems==='true'
-    }    
-    if(mpSpawnRate!==''){
-        setSelect('mpSpawnRate',mpSpawnRate);
-    }
-    if(mpHyper !==''){
-        document.getElementById('mpHyper').checked = mpHyper==='true'
+    for(let option in options){
+        let optionDetails = options[option]
+        let cookieValue = cookieManager.getCookie(option);
+        if(cookieValue!==''){
+            if(optionDetails.elementType !== 'checkbox'){
+                setSelect(optionDetails.elementId,cookieValue)
+            }else{
+                document.getElementById(optionDetails.elementId).checked = cookieValue==='true'
+            }
+        }        
     }
 }
 
@@ -122,18 +131,16 @@ showMenu=function(e){
 }
 
 saveAndBack=function(){
-    let difficulty = document.getElementById('difficultySelect').value;
-    let mode = document.getElementById('gamemodeSelect').value;
-    let size = document.getElementById('sizeSelect').value;
-    let mpItems = document.getElementById('mpItems').checked;
-    let mpSpawnRate = document.getElementById('mpSpawnRate').value;
-    let mpHyper = document.getElementById('mpHyper').checked;
-    cookieManager.setCookie('difficulty',difficulty,365);
-    cookieManager.setCookie('mode',mode,365);
-    cookieManager.setCookie('size',size,365);
-    cookieManager.setCookie('mpSpawnRate',mpSpawnRate,365);
-    cookieManager.setCookie('mpItems',mpItems,365);
-    cookieManager.setCookie('mpHyper',mpHyper,365);
+    for(let option in options){
+        let optionDetails = options[option]          
+        let cookieValue = '';      
+        if(optionDetails.elementType !== 'checkbox'){
+            cookieValue = document.getElementById(optionDetails.elementId).value;;                
+        }else{
+            cookieValue = document.getElementById(optionDetails.elementId).checked;                
+        }
+        cookieManager.setCookie(option,cookieValue,365);                
+    }    
     back();
 }
 
