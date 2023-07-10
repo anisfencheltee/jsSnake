@@ -52,7 +52,7 @@ class Game {
     multiplayerItemsSpawnRate = 10;
     multiplayerHyperMode = false;
     multiplayerHyperModifier = 2;
-    gameOver = false;
+    gameOver = true;
     pause = false;
     constructor(){
         console.log('Creating Game');
@@ -138,6 +138,7 @@ class Game {
             this.snakes.push(new Snake(i));
         } 
         document.getElementById('field').classList.add(this.ruleset) 
+        this.gameOver = false;
         this.counting = true;           
         let countDown = document.getElementById('countDown');
         countDown.innerHTML = this.countdown; 

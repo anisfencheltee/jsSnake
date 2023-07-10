@@ -160,7 +160,7 @@ document.addEventListener("keydown", (e) => {
     } else if(e.key==='Escape'){
         if(game.pause){            
             unpauseGame();
-        }else{            
+        }else if(!game.gameOver){            
             game.pauseGame();        
         }        
     }
