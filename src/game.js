@@ -163,6 +163,10 @@ document.addEventListener("keydown", (e) => {
         }else if(!game.gameOver){            
             game.pauseGame();        
         }        
+    } else if(e.key==='Enter'){
+        if(document.activeElement.classList.contains('button')){
+            document.activeElement.click()
+        }
     }
 });
 setOptions();

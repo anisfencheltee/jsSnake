@@ -44,6 +44,9 @@ a:visited {
     cursor: pointer;
     background-color: olivedrab;    
 }
+.button:focus{        
+    background-color: olivedrab;    
+}
 .countDown{    
     margin-top: 20vh;      
     font-size:50px;              
