@@ -39,6 +39,7 @@ body {
     line-height: 90vh;
 }
 #damage.animate {
+    z-index:10;
     border: 35px solid rgba(192, 57, 43, 1);
     animation:0.6s ease-in 0s grow;    
     animation-fill-mode: forwards;
@@ -77,6 +78,10 @@ body {
 }
   
 @media (orientation: portrait) {
+    #damage{
+        height: 90vw;
+        width: 90vw;
+    }
     .field {
         height: 90vw;
         width: 90vw;

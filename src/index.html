@@ -19,8 +19,8 @@
 </head>
 <body>
 <div id="game" class = 'container'>
-    <div id = "field" class = "field"></div>
     <div id="damage"></div>
+    <div id = "field" class = "field"></div>    
     <div id='time' class="hidden">
         <div id='timeContainer'>Time Left: <span id = 'timeLeft'></span></div>
     </div>        
@@ -72,6 +72,24 @@
                 <option value="80">Huge</option>
                 <option value="100">Ultra</option>
                 </select>
+            </label>
+        </p>
+        <p>
+            <label>Multiplayer Items:<input type="checkbox" id = "mpItems" value ="mpItems" checked = true>
+            </label>
+        </p>
+        <p>
+            <label>Multiplayer Items Spawnrate:<select id="mpSpawnRate" name="mpSpawnRate">
+                <option value="5">Rare</option>
+                <option value="10" selected>Normal</option>
+                <option value="30">Often</option>
+                <option value="50">A Lot</option>
+                <option value="100">Always</option>
+                </select>
+            </label>
+        </p>
+        <p>
+            <label>Multiplayer Items Hayper:<input type="checkbox" id = "mpHyper" value ="mpHyper">
             </label>
         </p>
         <div id = "snake1" class = "button" onclick="saveAndBack()">Save</div>        

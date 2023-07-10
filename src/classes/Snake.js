@@ -15,7 +15,8 @@ class Snake{
     }
     positions = [];
     points = 0;
-
+    shortenBy = -1;
+    elongateBy = -1;
     constructor(player){
         console.log('Creating Snake');
         this.player = player
@@ -27,6 +28,24 @@ class Snake{
         let row = pos[0]+vektor[0];
         let col = pos[1]+vektor[1];
         return [row,col];
+    }
+    shorten(value){
+        this.shortenBy = value;    
+    }
+    gotShortened(){
+        this.shortenBy = this.shortenBy -1
+    }
+    willBeShorter(){
+        return this.shortenBy > -1;
+    }
+    elongate(value){
+        this.elongateBy = value;    
+    }
+    gotElongated(){
+        this.elongateBy = this.elongateBy -1
+    }
+    willBeLonger(){
+        return this.elongateBy > -1;
     }
 
     getPosition(){

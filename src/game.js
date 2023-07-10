@@ -42,6 +42,9 @@ play = function(e){
     let difficulty = cookieManager.getCookie('difficulty')
     let mode = cookieManager.getCookie('mode')
     let size = cookieManager.getCookie('size')        
+    let mpItems = cookieManager.getCookie('mpItems')     
+    let mpSpawnRate = cookieManager.getCookie('mpSpawnRate');
+    let mpHyper = cookieManager.getCookie('mpHyper');
     if(difficulty!==''){
         game.setDifficulty(difficulty);
     }
@@ -51,11 +54,20 @@ play = function(e){
     if(size!==''){
         game.setTiles(size);
     }    
+    if(mpItems!==''){
+        game.setMpItems(mpItems==='true');
+    }
+    if(mpSpawnRate !== ''){
+        game.setMpSpawnrate(mpSpawnRate);
+    }
+    if(mpHyper !== ''){
+        game.setHyperMode(mpHyper==='true');
+    }
     if(e.id==='classic'){
         gameMode = e.id;
     }else if(e.id === 'timeAttack'){
         gameMode = e.id;
-    }
+    }    
     game.menuManager.showOverlay('countDown') 
     game.setGameMode(gameMode);
     game.start(players)    
@@ -74,6 +86,9 @@ setOptions = function(){
     let difficulty = cookieManager.getCookie('difficulty');
     let mode = cookieManager.getCookie('mode');
     let size = cookieManager.getCookie('size');
+    let mpItems = cookieManager.getCookie('mpItems');
+    let mpSpawnRate = cookieManager.getCookie('mpSpawnRate')
+    let mpHyper = cookieManager.getCookie('mpHyper')
     if(difficulty!==''){
         setSelect('difficultySelect',difficulty);
     }
@@ -82,6 +97,15 @@ setOptions = function(){
     }
     if(size!==''){
         setSelect('sizeSelect',size);
+    }
+    if(mpItems !==''){
+        document.getElementById('mpItems').checked = mpItems==='true'
+    }    
+    if(mpSpawnRate!==''){
+        setSelect('mpSpawnRate',mpSpawnRate);
+    }
+    if(mpHyper !==''){
+        document.getElementById('mpHyper').checked = mpHyper==='true'
     }
 }
 
@@ -101,9 +125,15 @@ saveAndBack=function(){
     let difficulty = document.getElementById('difficultySelect').value;
     let mode = document.getElementById('gamemodeSelect').value;
     let size = document.getElementById('sizeSelect').value;
+    let mpItems = document.getElementById('mpItems').checked;
+    let mpSpawnRate = document.getElementById('mpSpawnRate').value;
+    let mpHyper = document.getElementById('mpHyper').checked;
     cookieManager.setCookie('difficulty',difficulty,365);
     cookieManager.setCookie('mode',mode,365);
     cookieManager.setCookie('size',size,365);
+    cookieManager.setCookie('mpSpawnRate',mpSpawnRate,365);
+    cookieManager.setCookie('mpItems',mpItems,365);
+    cookieManager.setCookie('mpHyper',mpHyper,365);
     back();
 }
 
