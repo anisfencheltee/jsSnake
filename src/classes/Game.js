@@ -53,6 +53,7 @@ class Game {
     multiplayerHyperMode = false;
     multiplayerHyperModifier = 2;
     gameOver = false;
+    pause = false;
     constructor(){
         console.log('Creating Game');
         this.timeManager = new TimeManager();
@@ -83,7 +84,8 @@ class Game {
         this.countdown = 5;
         this.direction = 'right';
         this.timer = 90000;
-        this.items = [];        
+        this.items = [];      
+        this.pause = false;  
         this.resetField();
     }
     clearField(){
@@ -135,7 +137,8 @@ class Game {
         for(let i = 0; i< players; i++){
             this.snakes.push(new Snake(i));
         } 
-        document.getElementById('field').classList.add(this.ruleset)     
+        document.getElementById('field').classList.add(this.ruleset) 
+        this.counting = true;           
         let countDown = document.getElementById('countDown');
         countDown.innerHTML = this.countdown; 
         countDown.offsetHeight;
@@ -151,8 +154,7 @@ class Game {
     }
 
     countDown(){
-        let countDown = document.getElementById('countDown');
-        this.counting = true;       
+        let countDown = document.getElementById('countDown');        
         this.countdown --;        
         countDown.classList.remove('animate')
         countDown.offsetHeight;
@@ -190,10 +192,28 @@ class Game {
             this.currentInterval = this.currentInterval-reducer>=this.minInterval?this.currentInterval-reducer:this.minInterval;
             this.lastReduced = this.points;
         }
-        if(!this.gameOver){
+        if(!this.gameOver && !this.pause){
             setTimeout(this.loop.bind(this),this.currentInterval);
         }
     }
+
+    pauseGame(){
+        if(!this.counting){
+            for(let i=0; i< this.snakes.length;i++){
+                this.restrictMovement(i+1);
+            }
+            game.restrictMovement(1);
+            this.menuManager.showOverlay('pause')
+            this.pause = true;
+        }        
+    }
+
+    unpause(){
+        this.pause = false;
+        this.menuManager.hideOverlay();         
+        setTimeout(this.loop.bind(this),this.currentInterval);
+    }
+
     tick(){
         this.updateItems();
         if(this.gameMode==='timeAttack'){
@@ -201,7 +221,7 @@ class Game {
         }        
         this.snakes.forEach((snake)=>{
             this.move(snake)    
-            if(!snake.allowMovement()){
+            if(!snake.allowMovement() && !this.pause){
                 snake.setMovementFree();
             }
             this.menuManager.setPointCounter(snake);            
