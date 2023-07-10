@@ -33,30 +33,30 @@
     <div id= "menu" class="menu visible">
         <h1>JS Snake</h1>
         <div class="options">
-            <div data-target='mode' id = "single" class = "button" onclick="showMenu(this)">Play</div>        
-            <div data-target='mode' id = "multi" class = "button" onclick="showMenu(this)">Multiplayer</div>        
-            <div data-target='options' class = "button" onclick="showMenu(this)">Options</div>        
-            <div data-target='highscores' class = "button" onclick="showMenu(this)">Highscores</div>                
+            <div data-target='mode' id = "single" class = "button" onclick="showMenu(this)" tabindex=0>Play</div>        
+            <div data-target='mode' id = "multi" class = "button" onclick="showMenu(this)" tabindex=0>Multiplayer</div>        
+            <div data-target='options' class = "button" onclick="showMenu(this)" tabindex=0>Options</div>        
+            <div data-target='highscores' class = "button" onclick="showMenu(this)" tabindex=0>Highscores</div>                
         </div>
     </div>
     <div id="mode" class="menu hidden">
         <h1>Gamemode</h1>
-        <div id = "classic" class = "button" onclick="play(this)">Classic</div>        
-        <div id = "timeAttack" class = "button" onclick="play(this)">Time Attack</div>        
-        <div class = "button" onclick="back()">Back</div>        
+        <div id = "classic" class = "button" onclick="play(this)" tabindex=0>Classic</div>        
+        <div id = "timeAttack" class = "button" onclick="play(this)" tabindex=0>Time Attack</div>        
+        <div class = "button" onclick="back()" tabindex=0>Back</div>        
     </div>
     <div id="options" class="menu hidden">
         <h1>Options</h1>
         <div class = 'optionContainer'>
             <p>
-                <label>Gamemode:<select id="gamemodeSelect" name="gamemodeSelect">
+                <label title="You want the original experience or the updated?">Gamemode:<select id="gamemodeSelect" name="gamemodeSelect">
                 <option value="snake1">Snake 1</option>
                 <option value="snake2">Snake 2</option>
                 </select>
                 </label>
             </p>
             <p>
-                <label>Difficulty:<select id="difficultySelect" name="difficultySelect">
+                <label  title="How fast is the snake?">Difficulty:<select id="difficultySelect" name="difficultySelect">
                     <option value="easy">Easy</option>
                     <option value="medium">Medium</option>
                     <option value="hard">Hard</option>
@@ -66,7 +66,7 @@
                 </label>
             </p>
             <p>
-                <label>Field Size:<select id="sizeSelect" name="sizeSelect">
+                <label title="How big do you want the field to be?">Field Size:<select id="sizeSelect" name="sizeSelect">
                     <option value="20">Small</option>
                     <option value="40" selected>Medium</option>
                     <option value="60">Large</option>
@@ -76,11 +76,11 @@
                 </label>
             </p>
             <p>
-                <label>Multiplayer Items:<input type="checkbox" id = "mpItems" value ="mpItems" checked = true>
+                <label title="Should Multiplayer Items spawn?">Multiplayer Items:<input type="checkbox" id = "mpItems" value ="mpItems" checked = true>
                 </label>
             </p>
             <p>
-                <label>Multiplayer Items Spawnrate:<select id="mpSpawnRate" name="mpSpawnRate">
+                <label title="How often do Special Multiplayer Items spawn">Multiplayer Items Spawnrate:<select id="mpSpawnRate" name="mpSpawnRate">
                     <option value="5">Rare</option>
                     <option value="10" selected>Normal</option>
                     <option value="30">Often</option>
@@ -90,23 +90,23 @@
                 </label>
             </p>
             <p>
-                <label>Multiplayer Items Hayper:<input type="checkbox" id = "mpHyper" value ="mpHyper">
+                <label title="HAYPA HAYPA, JK doubles values of Multiplayer Items">Multiplayer Items Hayper:<input type="checkbox" id = "mpHyper" value ="mpHyper">
                 </label>
             </p>
         </div>        
-        <div id = "saveAndBack" class = "button" onclick="saveAndBack()">Save</div>        
-        <div class = "button" onclick="back()">Back</div>
-        <div data-target='about' class = "button" onclick="showMenu(this)">About</div>                
+        <div id = "saveAndBack" class = "button" onclick="saveAndBack()" tabindex=0>Save</div>        
+        <div class = "button" onclick="back()" tabindex=0>Back</div>
+        <div data-target='about' class = "button" onclick="showMenu(this)" tabindex=0>About</div>                
     </div>
     <div id="highscores" class = "highscores hidden">
         <h1>Highscores:</h1>
-        <div class = "button" onclick="back()">Back to menu</div>  
+        <div class = "button" onclick="back()" tabindex=0>Back to menu</div>  
     </div>
     <div id="countDown" class = "countDown hidden"></div>
     <div id="pause" class = "pause hidden">
         <h1>Pause</h1>                          
-        <div id = "continue" class = "button" onclick="unpauseGame()">Continue</div>        
-        <div class = "button" onclick="back()">Quit</div>        
+        <div id = "continue" class = "button" onclick="unpauseGame()" tabindex=0>Continue</div>        
+        <div class = "button" onclick="back()" tabindex=0>Quit</div>        
     </div>
     <div id="gameOver" class = "gameOver hidden">
         <h1>Game Over</h1>        
@@ -118,10 +118,10 @@
             <span id="finalScore0" class="scores hidden">0</span><br />
             <span id="finalScore1" class="scores hidden">0</span>
         </div>          
-        <div id = "playAgain" class = "button" onclick="play(this)">
+        <div id = "playAgain" class = "button" onclick="play(this)" tabindex=0>
             Play Again
         </div>        
-        <div class = "button" onclick="back()">Back to menu</div>        
+        <div class = "button" onclick="back()" tabindex=0>Back to menu</div>        
     </div>
     <div id="about" class = "about hidden">
         <h1>About</h1>
@@ -130,7 +130,7 @@
         <a href="https://www.freepik.com/free-vector/wooden-floor-vector_4199562.htm#query=wood%20texture%20seemless&position=3&from_view=search&track=ais">Image by renata.s</a> on Freepik
         <br />
         <a href="https://www.flaticon.com/free-icons/snake" title="snake icons">Snake icons created by kerismaker - Flaticon</a>        
-        <div class = "button" onclick="back()">Back</div>        
+        <div class = "button" onclick="back()" tabindex=0>Back</div>        
     </div>
 </div>
 <script type='text/javascript' src='./game.js' ></script>
