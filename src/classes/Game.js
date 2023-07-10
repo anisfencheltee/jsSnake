@@ -137,7 +137,8 @@ class Game {
         for(let i = 0; i< players; i++){
             this.snakes.push(new Snake(i));
         } 
-        document.getElementById('field').classList.add(this.ruleset)     
+        document.getElementById('field').classList.add(this.ruleset) 
+        this.counting = true;           
         let countDown = document.getElementById('countDown');
         countDown.innerHTML = this.countdown; 
         countDown.offsetHeight;
@@ -153,8 +154,7 @@ class Game {
     }
 
     countDown(){
-        let countDown = document.getElementById('countDown');
-        this.counting = true;       
+        let countDown = document.getElementById('countDown');        
         this.countdown --;        
         countDown.classList.remove('animate')
         countDown.offsetHeight;
@@ -198,8 +198,14 @@ class Game {
     }
 
     pauseGame(){
-        this.menuManager.showOverlay('pause')
-        this.pause = true;
+        if(!this.counting){
+            for(let i=0; i< this.snakes.length;i++){
+                this.restrictMovement(i+1);
+            }
+            game.restrictMovement(1);
+            this.menuManager.showOverlay('pause')
+            this.pause = true;
+        }        
     }
 
     unpause(){
