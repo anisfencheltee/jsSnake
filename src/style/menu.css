@@ -25,8 +25,13 @@ a:visited {
     text-align: center;
     color: white;    
 }
-.menu, .gameOver, .about, .highscores {
+.menu, .gameOver, .about, .highscores, .pause {
     margin-top: 20vh;    
+}
+.optionContainer{
+    width:15vw;
+    margin:auto;
+    text-align: left;
 }
 .button{
     width:10vw;

@@ -53,6 +53,7 @@ class Game {
     multiplayerHyperMode = false;
     multiplayerHyperModifier = 2;
     gameOver = false;
+    pause = false;
     constructor(){
         console.log('Creating Game');
         this.timeManager = new TimeManager();
@@ -83,7 +84,8 @@ class Game {
         this.countdown = 5;
         this.direction = 'right';
         this.timer = 90000;
-        this.items = [];        
+        this.items = [];      
+        this.pause = false;  
         this.resetField();
     }
     clearField(){
@@ -190,10 +192,22 @@ class Game {
             this.currentInterval = this.currentInterval-reducer>=this.minInterval?this.currentInterval-reducer:this.minInterval;
             this.lastReduced = this.points;
         }
-        if(!this.gameOver){
+        if(!this.gameOver && !this.pause){
             setTimeout(this.loop.bind(this),this.currentInterval);
         }
     }
+
+    pauseGame(){
+        this.menuManager.showOverlay('pause')
+        this.pause = true;
+    }
+
+    unpause(){
+        this.pause = false;
+        this.menuManager.hideOverlay();         
+        setTimeout(this.loop.bind(this),this.currentInterval);
+    }
+
     tick(){
         this.updateItems();
         if(this.gameMode==='timeAttack'){
@@ -201,7 +215,7 @@ class Game {
         }        
         this.snakes.forEach((snake)=>{
             this.move(snake)    
-            if(!snake.allowMovement()){
+            if(!snake.allowMovement() && !this.pause){
                 snake.setMovementFree();
             }
             this.menuManager.setPointCounter(snake);            

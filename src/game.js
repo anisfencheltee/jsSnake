@@ -141,16 +141,22 @@ back=function(){
     game.menuManager.showOverlay('menu');
 }
 
+unpauseGame=function(){
+    game.unpause();
+}
 
 document.addEventListener("keydown", (e) => {
     e = e || window.event;
     if (Object.keys(controls).includes(e.key) &&  game.allowMovement(controls[e.key].player)) {
         game.restrictMovement(controls[e.key].player);
         game.setDirection(controls[e.key].player,controls[e.key].direction);
-    } else if((game.gameOver || game.allowMovement(1)) && e.key==='Enter'){
-        game.restrictMovement(1);
-        game.gameOver = true;
-        game.start();
+    } else if(e.key==='Escape'){
+        if(game.pause){            
+            unpauseGame();
+        }else{
+            game.restrictMovement(1);
+            game.pauseGame();        
+        }        
     }
 });
 setOptions();

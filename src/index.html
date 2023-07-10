@@ -47,52 +47,54 @@
     </div>
     <div id="options" class="menu hidden">
         <h1>Options</h1>
-        <p>
-            <label>Gamemode:<select id="gamemodeSelect" name="gamemodeSelect">
-            <option value="snake1">Snake 1</option>
-            <option value="snake2">Snake 2</option>
-            </select>
-            </label>
-        </p>
-        <p>
-            <label>Difficulty:<select id="difficultySelect" name="difficultySelect">
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-                <option value="impossible">Impossible</option>
-                <option value="debug">Debug</option>
+        <div class = 'optionContainer'>
+            <p>
+                <label>Gamemode:<select id="gamemodeSelect" name="gamemodeSelect">
+                <option value="snake1">Snake 1</option>
+                <option value="snake2">Snake 2</option>
                 </select>
-            </label>
-        </p>
-        <p>
-            <label>Field Size:<select id="sizeSelect" name="sizeSelect">
-                <option value="20">Small</option>
-                <option value="40" selected>Medium</option>
-                <option value="60">Large</option>
-                <option value="80">Huge</option>
-                <option value="100">Ultra</option>
-                </select>
-            </label>
-        </p>
-        <p>
-            <label>Multiplayer Items:<input type="checkbox" id = "mpItems" value ="mpItems" checked = true>
-            </label>
-        </p>
-        <p>
-            <label>Multiplayer Items Spawnrate:<select id="mpSpawnRate" name="mpSpawnRate">
-                <option value="5">Rare</option>
-                <option value="10" selected>Normal</option>
-                <option value="30">Often</option>
-                <option value="50">A Lot</option>
-                <option value="100">Always</option>
-                </select>
-            </label>
-        </p>
-        <p>
-            <label>Multiplayer Items Hayper:<input type="checkbox" id = "mpHyper" value ="mpHyper">
-            </label>
-        </p>
-        <div id = "snake1" class = "button" onclick="saveAndBack()">Save</div>        
+                </label>
+            </p>
+            <p>
+                <label>Difficulty:<select id="difficultySelect" name="difficultySelect">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                    <option value="impossible">Impossible</option>
+                    <option value="debug">Debug</option>
+                    </select>
+                </label>
+            </p>
+            <p>
+                <label>Field Size:<select id="sizeSelect" name="sizeSelect">
+                    <option value="20">Small</option>
+                    <option value="40" selected>Medium</option>
+                    <option value="60">Large</option>
+                    <option value="80">Huge</option>
+                    <option value="100">Ultra</option>
+                    </select>
+                </label>
+            </p>
+            <p>
+                <label>Multiplayer Items:<input type="checkbox" id = "mpItems" value ="mpItems" checked = true>
+                </label>
+            </p>
+            <p>
+                <label>Multiplayer Items Spawnrate:<select id="mpSpawnRate" name="mpSpawnRate">
+                    <option value="5">Rare</option>
+                    <option value="10" selected>Normal</option>
+                    <option value="30">Often</option>
+                    <option value="50">A Lot</option>
+                    <option value="100">Always</option>
+                    </select>
+                </label>
+            </p>
+            <p>
+                <label>Multiplayer Items Hayper:<input type="checkbox" id = "mpHyper" value ="mpHyper">
+                </label>
+            </p>
+        </div>        
+        <div id = "saveAndBack" class = "button" onclick="saveAndBack()">Save</div>        
         <div class = "button" onclick="back()">Back</div>
         <div data-target='about' class = "button" onclick="showMenu(this)">About</div>                
     </div>
@@ -101,6 +103,11 @@
         <div class = "button" onclick="back()">Back to menu</div>  
     </div>
     <div id="countDown" class = "countDown hidden"></div>
+    <div id="pause" class = "pause hidden">
+        <h1>Pause</h1>                          
+        <div id = "continue" class = "button" onclick="unpauseGame()">Continue</div>        
+        <div class = "button" onclick="back()">Quit</div>        
+    </div>
     <div id="gameOver" class = "gameOver hidden">
         <h1>Game Over</h1>        
         <div id="chickenDinner" class="hidden">
