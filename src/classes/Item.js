@@ -24,18 +24,19 @@ class Item{
     }
     setType(){
         let value = Math.floor(Math.random() * 100);
-        if(value<this.types.ultra.spawnRate){
-            this.type = 'ultra';
-        }else if(value<this.types.rare.spawnRate){
+        if(value < this.types.normal.spawnRate){
+            this.type = 'normal';
+        }else if(value<this.types.rare.spawnRate+this.types.normal.spawnRate){
             this.type = 'rare';
         }else{
-            this.type = 'normal';
+            this.type = 'ultra';
         }
         this.lifetime = this.types[this.type].lifetime;
     }
     getPointValue(){
         return this.types[this.type].points
     }
+    
     getLifetime(){
         return this.lifetime;
     }

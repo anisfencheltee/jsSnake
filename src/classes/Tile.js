@@ -26,6 +26,12 @@ class Tile {
         this.field.classList.add('item');
         this.field.classList.add(this.itemObject.getType());
     }
+    addMPItem(row,col){
+        this.item = true;
+        this.itemObject = new MultiplayerItem();
+        this.field.classList.add('item');
+        this.field.classList.add(this.itemObject.getType());
+    }
     removeItem(){
         this.item = false;        
         this.field.classList.remove('item');

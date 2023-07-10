@@ -1,4 +1,9 @@
 
+.item{
+    border-radius: 50%;
+    border-color: black;
+}
+
 .item.normal {
     background-color: purple;        
     /*background-image: url('../res/items/apple.png');*/
@@ -11,6 +16,12 @@
 }
 .item.ultra {
     background-color: gold;    
+    /*background-image: url('../res/items/star.png');*/
+    background-size: contain;
+}
+
+.item.multiplayer {
+    background-color: violet;    
     /*background-image: url('../res/items/star.png');*/
     background-size: contain;
 }

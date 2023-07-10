@@ -48,6 +48,10 @@ class Game {
     field = [];
     lastReduced = 0;
     reducer = 0;
+    multiplayerItems = false;
+    multiplayerItemsSpawnRate = 10;
+    multiplayerHyperMode = false;
+    multiplayerHyperModifier = 2;
     gameOver = false;
     constructor(){
         console.log('Creating Game');
@@ -79,7 +83,7 @@ class Game {
         this.countdown = 5;
         this.direction = 'right';
         this.timer = 90000;
-        this.items = [];
+        this.items = [];        
         this.resetField();
     }
     clearField(){
@@ -203,11 +207,21 @@ class Game {
             this.menuManager.setPointCounter(snake);            
         })      
         let length = this.items.length
-        if(Object.entries(this.items).length===0 || this.noNormalItemsOnField()){
-            this.spawnItem();
+        if(Object.entries(this.items).length===0 || this.noNormalItemsOnField()){            
+            let itemType = 'normal'
+            if(this.multiplayerItemWillBeSpawned()){
+                itemType = 'multiplayer'
+            }
+            this.spawnItem(itemType);
         }
     }
-    
+    multiplayerItemWillBeSpawned(){
+        if(this.snakes.length > 1 && this.multiplayerItems){
+            let probability = Math.floor(Math.random() * 100);        
+            return probability < this.multiplayerItemsSpawnRate;  
+        }        
+        return false;
+    }
     move = function(snake){
         let positions = snake.getPosition()
         let nextPos = snake.getNextPosition();
@@ -223,38 +237,99 @@ class Game {
                 field.removeItem()
                 delete this.items[newPos[0]+','+newPos[1]]
                 field.activate(player);
-                snake.increasePoints(item.getPointValue());  
-                this.points +=1;              
+                if(item.getType()!=='multiplayer'){
+                    snake.increasePoints(item.getPointValue());  
+                    this.points +=1;              
+                }else{
+                    this.handleMpItem(snake, item);
+                }             
                 break;
             case 'blocked':
             case 'snake':
-            case 'outOfBounds':
-                this.playDamageAnimation();                       
+            case 'outOfBounds':                
                 if(this.gameMode === 'classic'){
                     this.gameOver = true;
                     this.gameIsOverNow(player);                
-                }else if(event==='outOfBounds'){
-                    row = this.saveGetPosition(nextPos[0]);
-                    col = this.saveGetPosition(nextPos[1]);  
-                    newPos = [row,col]
-                    this.field[positions[0][0]][positions[0][1]].deactivate();
-                    this.field[newPos[0]][newPos[1]].activate(player);
-                    positions.splice(0,1);                                 
-                    let points = snake.getPoints() - 10;
-                    snake.setPoints(points)                                               
                 }else{
-                    let points = snake.getPoints() - 10;
-                    snake.setPoints(points)                                               
-                }        
+                    if(event==='outOfBounds'){
+                        this.playDamageAnimation();                       
+                        row = nextPos[0];
+                        col = nextPos[1];  
+                        newPos = [row,col]
+                        this.field[positions[0][0]][positions[0][1]].deactivate();
+                        this.field[newPos[0]][newPos[1]].activate(player);
+                        positions.splice(0,1);                                 
+                        let points = snake.getPoints() - 10;
+                        snake.setPoints(points)                                               
+                    }else{
+                        this.playDamageAnimation(); 
+                        row = this.saveGetPosition(nextPos[0]);
+                        col = this.saveGetPosition(nextPos[1]);  
+                        newPos = [row,col]
+                        this.field[positions[0][0]][positions[0][1]].deactivate();
+                        this.field[newPos[0]][newPos[1]].activate(player);
+                        positions.splice(0,1);                            
+                        let points = snake.getPoints() - 10;
+                        snake.setPoints(points)                                                                      
+                    }        
+                } 
                 break;
-            default:
-                this.field[positions[0][0]][positions[0][1]].deactivate();
+            default:                
                 this.field[newPos[0]][newPos[1]].activate(player);
-                positions.splice(0,1);
+                if(snake.willBeLonger()){
+                    snake.gotElongated();
+                }else{
+                    let reducer = 1;
+                    if(snake.willBeShorter() && positions.length>1){
+                        snake.gotShortened();   
+                        reducer = 2;                     
+                    }else if(snake.willBeShorter()){
+                        snake.shorten(-1)
+                    }
+                    while(reducer>0){
+                        this.field[positions[0][0]][positions[0][1]].deactivate();
+                        positions.splice(0,1);
+                        reducer --
+                    }                    
+                }                
         }     
         positions[positions.length]=newPos;        
         snake.updatePosition(positions);
     }
+
+    handleMpItem(snake,item){
+        let points = 0;        
+        let player = snake.getPlayer();
+        let index = player===0?1:0;
+        let otherPlayer = this.snakes[index]        
+        let value = this.multiplayerHyperMode?item.getValue()*this.multiplayerHyperModifier:item.getValue()
+        switch(item.getMpItemType()){            
+            case 'getPoints':                
+                points = snake.getPoints() + value;
+                snake.setPoints(points)          
+                break;
+            case 'removePoints':                          
+                points = otherPlayer.getPoints() + value;
+                otherPlayer.setPoints(points)                          
+                break;
+            case 'stealPoints':
+                points = snake.getPoints() + value;
+                snake.setPoints(points)                          
+                points = otherPlayer.getPoints() - value;
+                otherPlayer.setPoints(points)                          
+                break;
+            case 'shorten':
+                snake.shorten(value)
+                break;
+            case 'elongate':                
+                otherPlayer.elongate(value)                          
+                break;
+            default:
+                console.log("Not knowing how to handle:")
+                console.log(item.getMpItemType())
+        }        
+    }
+
     noNormalItemsOnField(){
         var noNormalItems=true;
         for(const[index,item] of Object.entries(this.items)){
@@ -330,20 +405,25 @@ class Game {
         }
         this.menuManager.showOverlay('gameOver');
     }
-    spawnItem(){
+    spawnItem(type = 'normal'){
         var spawnRow = Math.floor(Math.random() * this.tiles);
         var spawnCol = Math.floor(Math.random() * this.tiles);  
         while(this.field[spawnRow][spawnCol].active){
             var spawnRow = Math.floor(Math.random() * this.tiles);
             var spawnCol = Math.floor(Math.random() * this.tiles);
         }         
-        this.field[spawnRow][spawnCol].addItem(spawnRow,spawnCol);           
+        if(type==='normal'){
+            this.field[spawnRow][spawnCol].addItem(spawnRow,spawnCol);                   
+        }else{
+            this.field[spawnRow][spawnCol].addMPItem(spawnRow,spawnCol);                   
+        }
         let item = this.field[spawnRow][spawnCol].getItem()        
         this.items[spawnRow+','+spawnCol] = item;
         if(item.getType()!=='normal' &&this.items.length<10){
             this.spawnItem();
         }
     }
+    
     setStartPosition = function(snake){    
         var offset = Math.floor(this.tiles/4);
         var startRow = this.getRandomInInterval(offset,this.tiles-offset);
@@ -397,6 +477,15 @@ class Game {
     setTiles(size){
         this.clearField();
         this.initialize(parseInt(size))
+    }
+    setMpItems(mpItems){
+        this.multiplayerItems = mpItems;
+    }
+    setHyperMode(hyper){
+        this.multiplayerHyperMode = hyper;
+    }
+    setMpSpawnrate(rate){
+        this.multiplayerItemsSpawnRate = rate
     }
     setDirection(player,direction){
         player = player-1
