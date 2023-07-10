@@ -1,12 +1,14 @@
 body {
     overscroll-behavior: contain;
+    background-image: url('../res/439.jpg');    
+    background-repeat: repeat;
   }
 .container {
     height: 98vh;
     width: 98vw;
     text-align: center;
     z-index: 1;
-    background-color: white;
+    /*background-color: white;*/
 }
 .field {
     margin:auto;
