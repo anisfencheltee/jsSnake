@@ -2,6 +2,7 @@ body {
     overscroll-behavior: contain;
     background-image: url('../res/439.jpg');    
     background-repeat: repeat;
+    caret-color: transparent;
   }
 .container {
     height: 98vh;
